@@ -1,0 +1,16 @@
+---
+alwaysApply: true
+---
+### Mục tiêu sản phẩm:
+- Tạo lộ trình luyện tập cá nhân hóa cho người dùng theo mục tiêu giảm cân.
+- Giao diện đơn giản, dễ dùng, hỗ trợ cả người mới.
+- Dữ liệu bài tập được hiển thị từ mock JSON, có thể thay bằng API về sau.
+
+### Tính năng cốt lõi (MVP):
+1. Đăng nhập / Đăng ký (email, Google)
+2. Điền thông tin cá nhân & thói quen
+3. App tạo kế hoạch luyện tập hằng tuần
+4. Giao diện bài tập hằng ngày (hình ảnh + hướng dẫn)
+5. Theo dõi tiến độ
+6. Bộ nhắc tập (notification local)
+7. Giao diện responsive đẹp, thân thiện

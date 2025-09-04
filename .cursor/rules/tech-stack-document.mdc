@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+| Layer              | Stack dùng                                                                 |
+|--------------------|----------------------------------------------------------------------------|
+| **Frontend**        | Flutter 3.x + Riverpod (state management) + GoRouter (navigation)          |
+| **Mock backend**    | Dữ liệu local JSON (tạm thời) lưu trong assets/json/                      |
+| **Sau này API**     | REST API (NestJS hoặc Supabase)                                           |
+| **Media**           | Hình ảnh/video minh họa lưu trên Cloudinary hoặc local tạm                |
+| **Local DB**        | SharedPreferences                                               |
+| **Notification**    | flutter_local_notifications (nhắc lịch tập)                              |

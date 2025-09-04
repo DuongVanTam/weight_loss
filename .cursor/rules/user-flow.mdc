@@ -1,0 +1,16 @@
+---
+alwaysApply: true
+---
+[Splash Screen]
+    ↓
+[Onboarding Giới thiệu App]
+    ↓
+[Form Cá Nhân Hóa theo mục tiêu]
+    ↓
+[Tóm tắt kế hoạch → Bắt đầu]
+    ↓
+[Màn hình chính (Dashboard)]
+    ├── Hôm nay tập gì?
+    ├── Xem toàn bộ kế hoạch tuần
+    ├── Tiến độ cá nhân
+    └── Cài đặt cá nhân

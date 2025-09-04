@@ -1,0 +1,13 @@
+---
+alwaysApply: true
+---
+**assets/json/workouts.json**
+mock trước các json cần thiết, tích hợp với Backend sau
+
+**Cách gọi trong Flutter:**
+```dart
+final data = await rootBundle.loadString('assets/json/workouts.json');
+final Map<String, dynamic> jsonData = jsonDecode(data);
+```
+
+---

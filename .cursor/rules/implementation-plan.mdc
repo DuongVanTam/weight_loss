@@ -1,0 +1,36 @@
+---
+alwaysApply: true
+---
+
+### P1: Chuẩn bị (1–3)
+1. Tạo config cơ bản: fonts, theme
+2. Thiết lập cấu trúc thư mục
+3. Cài các dependency cần thiết (go_router, riverpod, shared_preferences, json_annotation, etcetc)
+
+### P2: Onboarding + Form Cá Nhân Hóa (4–10)
+4. Splash + Intro screen
+5. Tạo form thu thập dữ liệu giảm cân: mỗi thông tin sẽ là 1 màn hình
+Cân nặng hiện tại
+Cân nặng mục tiêu
+Thông tin các lần giảm cân trước đó (nếu có)
+Năm sinh
+Chiều cao
+Khu vực muốn giảm mỡ (có lưu ý về việc không thể giảm mỡ cục bộ)
+Hình dáng hiện tại (chọn qua hình ảnh minh họa)
+Hình dáng mong muốn (chọn qua hình ảnh minh họa)
+Thường ăn mấy bữa/ngày
+Bạn có thường ăn đúng giờ không?
+Mức độ vận động hàng ngày (chọn theo cấp độ: Ít vận động, Vận động nhẹ, Vừa phải, Năng động)
+Sở thích luyện tập (Cardio, HIIT, Yoga,...)
+Thường tập ở đâu (Tại nhà, phòng gym)
+Có dụng cụ nào không (liệt kê/chọn)
+Vùng cơ thể cần tránh (do chấn thương)
+
+6. Lưu thông tin form user nhập
+7.
+- Tạo ra 30 bài tập phổ biến, lưu dưới dạng json: chứa thông tin phù hợp với đối tượng nào dựa vào các thông tin người dùng nhập
+- Lựa chọn các bài tập phù hợp với mục đích, thông tin người dùng lựa chọn
+- Hiển thị tóm tắt kế hoạch
+8. Hiển thị loading → tạo kế hoạch
+9. Lưu local kế hoạch
+10. Chuyển đến màn dashboard

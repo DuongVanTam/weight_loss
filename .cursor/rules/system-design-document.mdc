@@ -1,0 +1,38 @@
+---
+alwaysApply: true
+---
+**Cấu trúc thư mục Flutter:**
+```
+lib/
+├── main.dart
+├── theme/                 # Config theme, fonts, màu sắc
+│   ├── app_colors.dart
+│   ├── app_typography.dart
+│   └── app_theme.dart
+├── core/                  # Logic dùng chung
+│   ├── models/            # Data model (Workout, UserProfile, Plan…)
+│   ├── services/          # API / JSON loader / Local DB
+│   ├── utils/             # Helper function, formatter
+│   └── constants/         # Chuỗi, key, spacing token
+├── features/              # Mỗi module là 1 thư mục riêng
+│   ├── auth/              # Đăng nhập / đăng ký
+│   ├── onboarding/        # Chọn mục tiêu, nhập thông tin
+│   ├── dashboard/         # Trang chính (bottom nav)
+│   │   ├── workout/       # Tab tập luyện
+│   │   ├── progress/      # Tab theo dõi
+│   │   └── profile/       # Tab cá nhân
+│   └── settings/          # Tuỳ chỉnh (dark mode, notification…)
+├── data/                  # Mock data
+│   └── mock/
+│       ├── workouts.json
+│       └── plans.json
+├── shared/                # Thành phần tái sử dụng
+│   ├── widgets/           # Button, Card, AppBar custom…
+│   ├── styles/            # Padding, radius, shadow…
+│   └── l10n/              # Đa ngôn ngữ
+└── features/_demo/        # Trang thử theme, playground
+    └── theme_preview_page.dart
+
+```
+
+---
