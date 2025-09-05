@@ -1,0 +1,23 @@
+# Build configuration for code generation
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          # Generate fromJson and toJson methods
+          explicit_to_json: true
+          include_if_null: false
+          # Use field names as JSON keys
+          field_rename: snake
+      freezed:
+        options:
+          # Generate copyWith methods
+          copy_with: true
+          # Generate equality and hashCode
+          equal: true
+          # Generate toString method
+          to_string: true
+      riverpod_generator:
+        options:
+          # Generate providers with proper naming
+          provider_name_prefix: ""
