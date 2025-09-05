@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'theme/app_theme.dart';
+import 'features/_demo/theme_preview_page.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const WeightLossApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class WeightLossApp extends StatelessWidget {
+  const WeightLossApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      title: 'Weight Loss App',
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ThemeMode.system,
+      home: const ThemePreviewPage(), // Temporary for testing theme
+      debugShowCheckedModeBanner: false,
     );
   }
 }

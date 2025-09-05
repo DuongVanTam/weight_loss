@@ -1,0 +1,69 @@
+{
+  "plans": [
+    {
+      "id": "beginner_weight_loss",
+      "name": "Beginner Weight Loss Plan",
+      "description": "A gentle introduction to fitness focused on weight loss",
+      "duration": 28,
+      "goal": "weight_loss",
+      "difficulty": "beginner",
+      "workoutsPerWeek": 4,
+      "estimatedCaloriesPerSession": 200,
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "days": [
+            {
+              "day": 1,
+              "workoutIds": ["1", "2", "3"],
+              "totalDuration": 720,
+              "restDay": false
+            },
+            {
+              "day": 2,
+              "workoutIds": [],
+              "totalDuration": 0,
+              "restDay": true
+            },
+            {
+              "day": 3,
+              "workoutIds": ["2", "3"],
+              "totalDuration": 420,
+              "restDay": false
+            },
+            {
+              "day": 4,
+              "workoutIds": [],
+              "totalDuration": 0,
+              "restDay": true
+            },
+            {
+              "day": 5,
+              "workoutIds": ["1", "2"],
+              "totalDuration": 480,
+              "restDay": false
+            },
+            {
+              "day": 6,
+              "workoutIds": [],
+              "totalDuration": 0,
+              "restDay": true
+            },
+            {
+              "day": 7,
+              "workoutIds": ["3"],
+              "totalDuration": 240,
+              "restDay": false
+            }
+          ]
+        }
+      ],
+      "tips": [
+        "Start slowly and focus on proper form",
+        "Stay hydrated throughout your workout",
+        "Listen to your body and rest when needed",
+        "Consistency is more important than intensity"
+      ]
+    }
+  ]
+}

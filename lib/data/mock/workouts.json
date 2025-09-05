@@ -1,0 +1,81 @@
+{
+  "workouts": [
+    {
+      "id": "1",
+      "name": "Push-ups",
+      "category": "strength",
+      "targetMuscles": ["chest", "triceps", "shoulders"],
+      "difficulty": "beginner",
+      "duration": 300,
+      "instructions": [
+        "Start in a plank position with hands shoulder-width apart",
+        "Lower your body until your chest nearly touches the floor",
+        "Push back up to the starting position",
+        "Repeat for desired number of reps"
+      ],
+      "sets": 3,
+      "reps": 15,
+      "restTime": 60,
+      "equipment": "none",
+      "location": "home",
+      "calories": 50,
+      "suitableFor": {
+        "weightLoss": true,
+        "muscleGain": true,
+        "beginners": true
+      }
+    },
+    {
+      "id": "2", 
+      "name": "Jumping Jacks",
+      "category": "cardio",
+      "targetMuscles": ["full_body"],
+      "difficulty": "beginner",
+      "duration": 180,
+      "instructions": [
+        "Stand upright with your legs together, arms at your sides",
+        "Bend your knees slightly, and jump into the air",
+        "As you jump, spread your legs to be about shoulder-width apart",
+        "Stretch your arms out and over your head",
+        "Jump back to starting position"
+      ],
+      "sets": 3,
+      "reps": 30,
+      "restTime": 30,
+      "equipment": "none",
+      "location": "home",
+      "calories": 80,
+      "suitableFor": {
+        "weightLoss": true,
+        "muscleGain": false,
+        "beginners": true
+      }
+    },
+    {
+      "id": "3",
+      "name": "Squats",
+      "category": "strength",
+      "targetMuscles": ["quadriceps", "glutes", "hamstrings"],
+      "difficulty": "beginner",
+      "duration": 240,
+      "instructions": [
+        "Stand with feet hip-width apart",
+        "Lower your body as if sitting back into a chair",
+        "Keep your chest up and knees behind your toes",
+        "Lower until thighs are parallel to the floor",
+        "Push through your heels to return to start"
+      ],
+      "sets": 3,
+      "reps": 20,
+      "restTime": 60,
+      "equipment": "none",
+      "location": "home",
+      "calories": 60,
+      "suitableFor": {
+        "weightLoss": true,
+        "muscleGain": true,
+        "beginners": true
+      }
+    }
+  ]
+}
