@@ -4,11 +4,9 @@ import '../../core/services/local_storage_service.dart';
 import '../../core/router/app_router.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_typography.dart';
-import '../../core/constants/app_constants.dart';
-import '../../shared/widgets/primary_button.dart';
 
-/// Intro screen with onboarding slides
-/// Shows 3-4 slides introducing the app features
+/// Intro screen with personalized workout plan message
+/// Shows a single screen with background image and call-to-action
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
 
@@ -16,40 +14,56 @@ class IntroPage extends StatefulWidget {
   State<IntroPage> createState() => _IntroPageState();
 }
 
-class _IntroPageState extends State<IntroPage> {
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
+class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _slideAnimation;
+  late Animation<double> _fadeAnimation;
 
-  final List<IntroSlide> _slides = [
-    IntroSlide(
-      icon: Icons.person_outline_rounded,
-      title: 'Cá nhân hóa bài tập',
-      description: 'Tạo kế hoạch luyện tập phù hợp với mục tiêu và thể trạng của riêng bạn',
-    ),
-    IntroSlide(
-      icon: Icons.schedule_rounded,
-      title: 'Mỗi ngày một buổi dành riêng cho bạn',
-      description: 'Chỉ cần 15-30 phút mỗi ngày để có một cơ thể khỏe mạnh và vóc dáng lý tưởng',
-    ),
-    IntroSlide(
-      icon: Icons.trending_up_rounded,
-      title: 'Theo dõi tiến bộ & nhắc tập',
-      description: 'Ghi lại quá trình luyện tập và nhận thông báo nhắc nhở để không bỏ lỡ buổi tập nào',
-    ),
-    IntroSlide(
-      icon: Icons.emoji_events_rounded,
-      title: 'Đạt được mục tiêu của bạn',
-      description: 'Với sự kiên trì và kế hoạch phù hợp, bạn sẽ sớm có được kết quả mong muốn',
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _setupAnimations();
+    _startAnimation();
+  }
+
+  void _setupAnimations() {
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 450),
+      vsync: this,
+    );
+
+    _slideAnimation = Tween<double>(
+      begin: 50.0,
+      end: 0.0,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOut,
+    ));
+
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOut,
+    ));
+  }
+
+  void _startAnimation() {
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        _animationController.forward();
+      }
+    });
+  }
 
   @override
   void dispose() {
-    _pageController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
-  Future<void> _handleSkipOrStart() async {
+  Future<void> _handleStart() async {
     // Mark intro as seen
     await LocalStorageService.setHasSeenIntro(true);
     
@@ -59,104 +73,54 @@ class _IntroPageState extends State<IntroPage> {
     context.go(AppRouter.onboarding);
   }
 
-  void _nextPage() {
-    if (_currentPage < _slides.length - 1) {
-      _pageController.nextPage(
-        duration: AppConstants.animationMedium,
-        curve: Curves.easeInOut,
-      );
-    } else {
-      _handleSkipOrStart();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            // Header with skip button
-            Padding(
-              padding: const EdgeInsets.all(AppConstants.spacingM),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 80), // Balance the skip button
-                  // Page indicator dots
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(
-                      _slides.length,
-                      (index) => _buildDot(index),
-                    ),
-                  ),
-                  // Skip button
-                  TextButton(
-                    onPressed: _handleSkipOrStart,
-                    child: Text(
-                      'Bỏ qua',
-                      style: AppTypography.labelLarge.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                  ),
-                ],
+            // Background image
+            Positioned.fill(
+              child: Image.asset(
+                'assets/images/intro_bg.jpg',
+                fit: BoxFit.cover,
               ),
             ),
-
-            // Slides content
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentPage = index;
-                  });
-                },
-                itemCount: _slides.length,
-                itemBuilder: (context, index) {
-                  return _buildSlide(_slides[index]);
-                },
+            
+            // Gradient overlay
+            Positioned.fill(
+              child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.center,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black54,
+                      Colors.black87,
+                    ],
+                    stops: [0.0, 0.6, 1.0],
+                  ),
+                ),
               ),
             ),
-
-            // Bottom navigation
-            Padding(
-              padding: const EdgeInsets.all(AppConstants.spacingL),
-              child: Column(
-                children: [
-                  // Main action button
-                  SizedBox(
-                    width: double.infinity,
-                    child: PrimaryButton(
-                      onPressed: _nextPage,
-                      text: _currentPage == _slides.length - 1 
-                          ? 'Bắt đầu' 
-                          : 'Tiếp theo',
+            
+            // Content
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(0, _slideAnimation.value),
+                    child: Opacity(
+                      opacity: _fadeAnimation.value,
+                      child: _buildContent(),
                     ),
-                  ),
-                  
-                  if (_currentPage < _slides.length - 1) ...[
-                    const SizedBox(height: AppConstants.spacingM),
-                    // Previous button (only show if not on first page)
-                    if (_currentPage > 0)
-                      TextButton(
-                        onPressed: () {
-                          _pageController.previousPage(
-                            duration: AppConstants.animationMedium,
-                            curve: Curves.easeInOut,
-                          );
-                        },
-                        child: Text(
-                          'Quay lại',
-                          style: AppTypography.labelLarge.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                      ),
-                  ],
-                ],
+                  );
+                },
               ),
             ),
           ],
@@ -165,81 +129,64 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-  Widget _buildSlide(IntroSlide slide) {
+  Widget _buildContent() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppConstants.spacingL),
+      padding: const EdgeInsets.all(24.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Icon
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(AppConstants.radiusXl),
-            ),
-            child: Icon(
-              slide.icon,
-              size: 60,
-              color: AppColors.primary,
-            ),
-          ),
-          
-          const SizedBox(height: AppConstants.spacingXl),
-          
           // Title
           Text(
-            slide.title,
-            style: AppTypography.headlineMedium.copyWith(
+            'Kế hoạch tập luyện cá nhân',
+            style: AppTypography.headlineLarge.copyWith(
+              fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onSurface,
+              color: Colors.white,
             ),
             textAlign: TextAlign.center,
           ),
           
-          const SizedBox(height: AppConstants.spacingL),
+          const SizedBox(height: 16),
           
-          // Description
+          // Subtitle
           Text(
-            slide.description,
+            'LeanFit sẽ đồng hành cùng bạn để đạt vóc dáng mong muốn.',
             style: AppTypography.bodyLarge.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              fontSize: 15,
+              color: Colors.white.withOpacity(0.85),
               height: 1.5,
             ),
             textAlign: TextAlign.center,
+          ),
+          
+          const SizedBox(height: 32),
+          
+          // CTA Button
+          SizedBox(
+            width: double.infinity,
+            height: 52,
+            child: FilledButton(
+              onPressed: _handleStart,
+              style: FilledButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                'Bắt đầu',
+                style: AppTypography.buttonText.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
         ],
       ),
     );
   }
-
-  Widget _buildDot(int index) {
-    final bool isActive = index == _currentPage;
-    
-    return AnimatedContainer(
-      duration: AppConstants.animationFast,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      width: isActive ? 20 : 8,
-      height: 8,
-      decoration: BoxDecoration(
-        color: isActive ? AppColors.primary : AppColors.gray300,
-        borderRadius: BorderRadius.circular(4),
-      ),
-    );
-  }
-}
-
-/// Data model for intro slides
-class IntroSlide {
-  final IconData icon;
-  final String title;
-  final String description;
-
-  const IntroSlide({
-    required this.icon,
-    required this.title,
-    required this.description,
-  });
 }
 
