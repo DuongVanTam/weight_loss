@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/services/local_storage_service.dart';
-import '../../core/router/app_router.dart';
+import '../../core/services/user_form_service.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_typography.dart';
 
 /// Intro screen with personalized workout plan message
 /// Shows a single screen with background image and call-to-action
-class IntroPage extends StatefulWidget {
+class IntroPage extends ConsumerStatefulWidget {
   const IntroPage({super.key});
 
   @override
-  State<IntroPage> createState() => _IntroPageState();
+  ConsumerState<IntroPage> createState() => _IntroPageState();
 }
 
-class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
+class _IntroPageState extends ConsumerState<IntroPage> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _slideAnimation;
   late Animation<double> _fadeAnimation;
@@ -69,8 +70,10 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
     
     if (!mounted) return;
     
-    // Navigate to onboarding wizard
-    context.go(AppRouter.onboarding);
+    // Get the next form step and navigate to it
+    final formService = ref.read(userFormServiceProvider.notifier);
+    final nextRoute = formService.getNextStepRoute();
+    context.go(nextRoute);
   }
 
   @override

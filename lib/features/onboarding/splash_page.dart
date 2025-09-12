@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/services/local_storage_service.dart';
+import '../../core/services/user_form_service.dart';
 import '../../core/router/app_router.dart';
 import '../../core/constants/app_constants.dart';
 
 /// Splash screen with woman background image and LOOSE WEIGHT text
 /// Shows for 2 seconds with slide + fade animations
-class SplashPage extends StatefulWidget {
+class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  ConsumerState<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage>
+class _SplashPageState extends ConsumerState<SplashPage>
     with TickerProviderStateMixin {
   late AnimationController _slideAnimationController;
   late AnimationController _progressAnimationController;
@@ -85,15 +87,16 @@ class _SplashPageState extends State<SplashPage>
   }
 
   void _determineNavigationRoute() {
-    final bool hasProfile = LocalStorageService.hasUserProfile();
+    final formService = ref.read(userFormServiceProvider.notifier);
     final bool hasSeenIntro = LocalStorageService.hasSeenIntro();
 
-    if (hasProfile) {
+    if (formService.isFormCompleted) {
       // User has completed setup, go to dashboard
       context.go(AppRouter.dashboard);
     } else if (hasSeenIntro) {
-      // User has seen intro but hasn't completed setup
-      context.go(AppRouter.onboarding);
+      // User has seen intro but hasn't completed setup, continue from where they left off
+      final nextRoute = formService.getNextStepRoute();
+      context.go(nextRoute);
     } else {
       // First time user, show intro
       context.go(AppRouter.intro);

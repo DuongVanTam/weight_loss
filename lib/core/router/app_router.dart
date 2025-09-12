@@ -6,6 +6,23 @@ import '../../features/onboarding/intro_page.dart';
 import '../../features/onboarding/onboarding_page.dart';
 import '../../features/dashboard/dashboard_page.dart';
 import '../../features/auth/auth_page.dart';
+// Form pages
+import '../../features/onboarding/form/current_weight_page.dart';
+import '../../features/onboarding/form/target_weight_page.dart';
+import '../../features/onboarding/form/previous_attempts_page.dart';
+import '../../features/onboarding/form/birth_year_page.dart';
+import '../../features/onboarding/form/height_page.dart';
+import '../../features/onboarding/form/target_areas_page.dart';
+import '../../features/onboarding/form/current_body_shape_page.dart';
+import '../../features/onboarding/form/target_body_shape_page.dart';
+import '../../features/onboarding/form/meal_frequency_page.dart';
+import '../../features/onboarding/form/eating_schedule_page.dart';
+import '../../features/onboarding/form/activity_level_page.dart';
+import '../../features/onboarding/form/workout_preferences_page.dart';
+import '../../features/onboarding/form/workout_location_page.dart';
+import '../../features/onboarding/form/available_equipment_page.dart';
+import '../../features/onboarding/form/avoid_areas_page.dart';
+import '../../features/onboarding/form/form_summary_page.dart';
 
 /// Application router configuration using GoRouter
 class AppRouter {
@@ -15,6 +32,24 @@ class AppRouter {
   static const String dashboard = '/dashboard';
   static const String auth = '/auth';
   static const String themePreview = '/theme-preview';
+  
+  // Form routes
+  static const String formCurrentWeight = '/form/current-weight';
+  static const String formTargetWeight = '/form/target-weight';
+  static const String formPreviousAttempts = '/form/previous-attempts';
+  static const String formBirthYear = '/form/birth-year';
+  static const String formHeight = '/form/height';
+  static const String formTargetAreas = '/form/target-areas';
+  static const String formCurrentBodyShape = '/form/current-body-shape';
+  static const String formTargetBodyShape = '/form/target-body-shape';
+  static const String formMealFrequency = '/form/meal-frequency';
+  static const String formEatingSchedule = '/form/eating-schedule';
+  static const String formActivityLevel = '/form/activity-level';
+  static const String formWorkoutPreferences = '/form/workout-preferences';
+  static const String formWorkoutLocation = '/form/workout-location';
+  static const String formAvailableEquipment = '/form/available-equipment';
+  static const String formAvoidAreas = '/form/avoid-areas';
+  static const String formSummary = '/form/summary';
 
   static final GoRouter _router = GoRouter(
     initialLocation: splash, // Start with splash screen
@@ -59,6 +94,103 @@ class AppRouter {
         path: themePreview,
         name: 'theme-preview',
         builder: (context, state) => const ThemePreviewPage(),
+      ),
+
+      // Form routes
+      GoRoute(
+        path: formCurrentWeight,
+        name: 'form-current-weight',
+        builder: (context, state) => const CurrentWeightPage(),
+      ),
+      
+      GoRoute(
+        path: formTargetWeight,
+        name: 'form-target-weight',
+        builder: (context, state) => const TargetWeightPage(),
+      ),
+      
+      GoRoute(
+        path: formPreviousAttempts,
+        name: 'form-previous-attempts',
+        builder: (context, state) => const PreviousAttemptsPage(),
+      ),
+      
+      GoRoute(
+        path: formBirthYear,
+        name: 'form-birth-year',
+        builder: (context, state) => const BirthYearPage(),
+      ),
+      
+      GoRoute(
+        path: formHeight,
+        name: 'form-height',
+        builder: (context, state) => const HeightPage(),
+      ),
+      
+      GoRoute(
+        path: formTargetAreas,
+        name: 'form-target-areas',
+        builder: (context, state) => const TargetAreasPage(),
+      ),
+      
+      GoRoute(
+        path: formCurrentBodyShape,
+        name: 'form-current-body-shape',
+        builder: (context, state) => const CurrentBodyShapePage(),
+      ),
+      
+      GoRoute(
+        path: formTargetBodyShape,
+        name: 'form-target-body-shape',
+        builder: (context, state) => const TargetBodyShapePage(),
+      ),
+      
+      GoRoute(
+        path: formMealFrequency,
+        name: 'form-meal-frequency',
+        builder: (context, state) => const MealFrequencyPage(),
+      ),
+      
+      GoRoute(
+        path: formEatingSchedule,
+        name: 'form-eating-schedule',
+        builder: (context, state) => const EatingSchedulePage(),
+      ),
+      
+      GoRoute(
+        path: formActivityLevel,
+        name: 'form-activity-level',
+        builder: (context, state) => const ActivityLevelPage(),
+      ),
+      
+      GoRoute(
+        path: formWorkoutPreferences,
+        name: 'form-workout-preferences',
+        builder: (context, state) => const WorkoutPreferencesPage(),
+      ),
+      
+      GoRoute(
+        path: formWorkoutLocation,
+        name: 'form-workout-location',
+        builder: (context, state) => const WorkoutLocationPage(),
+      ),
+      
+      GoRoute(
+        path: formAvailableEquipment,
+        name: 'form-available-equipment',
+        builder: (context, state) => const AvailableEquipmentPage(),
+      ),
+      
+      GoRoute(
+        path: formAvoidAreas,
+        name: 'form-avoid-areas',
+        builder: (context, state) => const AvoidAreasPage(),
+      ),
+      
+      GoRoute(
+        path: formSummary,
+        name: 'form-summary',
+        builder: (context, state) => const FormSummaryPage(),
       ),
     ],
     
