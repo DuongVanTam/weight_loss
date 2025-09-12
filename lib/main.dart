@@ -4,14 +4,14 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'theme/app_theme.dart';
 import 'core/router/app_router.dart';
 import 'core/services/local_storage_service.dart';
-import 'core/services/notification_service.dart';
+// import 'core/services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize services
   await LocalStorageService.initialize();
-  await NotificationService.initialize();
+  // await NotificationService.initialize();
   
   // Initialize timezone data for notifications
   tz.initializeTimeZones();

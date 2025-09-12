@@ -71,6 +71,16 @@ class LocalStorageService {
     return _prefs.getBool(AppConstants.keyOnboardingComplete) ?? false;
   }
 
+  /// Save intro completion status
+  static Future<bool> setHasSeenIntro(bool hasSeen) async {
+    return await _prefs.setBool(AppConstants.keyHasSeenIntro, hasSeen);
+  }
+
+  /// Check if user has seen intro
+  static bool hasSeenIntro() {
+    return _prefs.getBool(AppConstants.keyHasSeenIntro) ?? false;
+  }
+
   // Generic Methods
   /// Save string value
   static Future<bool> setString(String key, String value) async {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/_demo/theme_preview_page.dart';
+import '../../features/onboarding/splash_page.dart';
+import '../../features/onboarding/intro_page.dart';
 import '../../features/onboarding/onboarding_page.dart';
 import '../../features/dashboard/dashboard_page.dart';
 import '../../features/auth/auth_page.dart';
@@ -8,30 +10,30 @@ import '../../features/auth/auth_page.dart';
 /// Application router configuration using GoRouter
 class AppRouter {
   static const String splash = '/';
+  static const String intro = '/intro';
   static const String onboarding = '/onboarding';
   static const String dashboard = '/dashboard';
   static const String auth = '/auth';
   static const String themePreview = '/theme-preview';
 
   static final GoRouter _router = GoRouter(
-    initialLocation: themePreview, // Temporary for development
+    initialLocation: splash, // Start with splash screen
     debugLogDiagnostics: true,
     routes: [
-      // Theme Preview (Development only)
+      // Splash Screen
       GoRoute(
-        path: themePreview,
-        name: 'theme-preview',
-        builder: (context, state) => const ThemePreviewPage(),
+        path: splash,
+        name: 'splash',
+        builder: (context, state) => const SplashPage(),
       ),
 
-      // Authentication
+      // Intro/Onboarding Flow
       GoRoute(
-        path: auth,
-        name: 'auth',
-        builder: (context, state) => const AuthPage(),
+        path: intro,
+        name: 'intro',
+        builder: (context, state) => const IntroPage(),
       ),
 
-      // Onboarding Flow
       GoRoute(
         path: onboarding,
         name: 'onboarding',
@@ -43,6 +45,20 @@ class AppRouter {
         path: dashboard,
         name: 'dashboard',
         builder: (context, state) => const DashboardPage(),
+      ),
+
+      // Authentication
+      GoRoute(
+        path: auth,
+        name: 'auth',
+        builder: (context, state) => const AuthPage(),
+      ),
+
+      // Theme Preview (Development only)
+      GoRoute(
+        path: themePreview,
+        name: 'theme-preview',
+        builder: (context, state) => const ThemePreviewPage(),
       ),
     ],
     

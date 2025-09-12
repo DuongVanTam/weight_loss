@@ -32,6 +32,7 @@ class AppConstants {
   static const String keyWorkoutPlan = 'workout_plan';
   static const String keyThemeMode = 'theme_mode';
   static const String keyOnboardingComplete = 'onboarding_complete';
+  static const String keyHasSeenIntro = 'has_seen_intro';
   
   // API Endpoints (for future use)
   static const String baseUrl = 'https://api.weightloss.app';
