@@ -47,7 +47,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateCurrentWeight(double weight) async {
     state = state.copyWith(
       currentWeight: weight,
-      currentStep: state.currentStep < 1 ? 1 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -57,7 +56,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateTargetWeight(double weight) async {
     state = state.copyWith(
       targetWeight: weight,
-      currentStep: state.currentStep < 2 ? 2 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -68,7 +66,6 @@ class UserFormService extends _$UserFormService {
     state = state.copyWith(
       hasPreviousAttempts: hasAttempts,
       previousAttemptsDetails: details,
-      currentStep: state.currentStep < 3 ? 3 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -78,7 +75,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateBirthYear(int year) async {
     state = state.copyWith(
       birthYear: year,
-      currentStep: state.currentStep < 4 ? 4 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -88,7 +84,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateHeight(double height) async {
     state = state.copyWith(
       height: height,
-      currentStep: state.currentStep < 5 ? 5 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -98,7 +93,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateTargetAreas(List<TargetArea> areas) async {
     state = state.copyWith(
       targetAreas: areas,
-      currentStep: state.currentStep < 6 ? 6 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -108,7 +102,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateCurrentBodyShape(BodyShape shape) async {
     state = state.copyWith(
       currentBodyShape: shape,
-      currentStep: state.currentStep < 7 ? 7 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -118,7 +111,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateTargetBodyShape(BodyShape shape) async {
     state = state.copyWith(
       targetBodyShape: shape,
-      currentStep: state.currentStep < 8 ? 8 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -128,7 +120,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateMealFrequency(MealFrequency frequency) async {
     state = state.copyWith(
       mealFrequency: frequency,
-      currentStep: state.currentStep < 9 ? 9 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -138,7 +129,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateEatingSchedule(bool hasRegular) async {
     state = state.copyWith(
       hasRegularEatingSchedule: hasRegular,
-      currentStep: state.currentStep < 10 ? 10 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -148,7 +138,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateActivityLevel(ActivityLevel level) async {
     state = state.copyWith(
       activityLevel: level,
-      currentStep: state.currentStep < 11 ? 11 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -158,7 +147,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateWorkoutPreferences(List<WorkoutPreference> preferences) async {
     state = state.copyWith(
       workoutPreferences: preferences,
-      currentStep: state.currentStep < 12 ? 12 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -168,7 +156,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateWorkoutLocation(WorkoutLocation location) async {
     state = state.copyWith(
       workoutLocation: location,
-      currentStep: state.currentStep < 13 ? 13 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -178,7 +165,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateAvailableEquipment(List<Equipment> equipment) async {
     state = state.copyWith(
       availableEquipment: equipment,
-      currentStep: state.currentStep < 14 ? 14 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -188,7 +174,6 @@ class UserFormService extends _$UserFormService {
   Future<void> updateAvoidAreas(List<String> areas) async {
     state = state.copyWith(
       avoidAreas: areas,
-      currentStep: state.currentStep < 15 ? 15 : state.currentStep,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -226,6 +211,14 @@ class UserFormService extends _$UserFormService {
       );
       await _saveUserProfile();
     }
+  }
+
+  /// Ensure current step is at least the given step number
+  /// This method is deprecated - step management is now handled by navigation flow
+  @Deprecated('Use moveToNextStep() and moveToPreviousStep() for navigation')
+  Future<void> ensureStepReached(int stepNumber) async {
+    // No-op - step management is now handled by navigation flow
+    print('DEBUG: ensureStepReached() - deprecated method called, ignoring');
   }
 
   /// Get route for a specific step number
@@ -273,12 +266,26 @@ class UserFormService extends _$UserFormService {
   /// Get completion percentage
   double get completionPercentage => (state.currentStep / 15.0).clamp(0.0, 1.0);
 
+  /// Skip current step and move to next (for testing/incomplete forms)
+  Future<String> skipToNextStep() async {
+    return await moveToNextStep();
+  }
+
   /// Move to next step and return the route
   Future<String> moveToNextStep() async {
+    // Ensure any pending state changes are saved first
+    await _saveUserProfile();
+    
     final currentStep = state.currentStep;
     final nextStep = currentStep + 1;
     
     print('DEBUG: moveToNextStep() - currentStep: $currentStep -> nextStep: $nextStep');
+    
+    // Validate that we're not exceeding the maximum step
+    if (nextStep > 15) {
+      print('DEBUG: moveToNextStep() - reached end, going to summary');
+      return '/form/summary';
+    }
     
     // Update state immediately
     state = state.copyWith(
@@ -290,7 +297,7 @@ class UserFormService extends _$UserFormService {
     print('DEBUG: moveToNextStep() - route: $route');
     print('DEBUG: moveToNextStep() - new currentStep: ${state.currentStep}');
     
-    // Save after getting route
+    // Save after updating step
     await _saveUserProfile();
     
     return route;

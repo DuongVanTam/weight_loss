@@ -34,6 +34,9 @@ abstract class BaseFormPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Step management is now handled purely by navigation flow
+    // No need for ensureStepReached() calls
+    
     return Scaffold(
       backgroundColor: AppColors.neutralBg,
       appBar: AppBar(
@@ -121,23 +124,16 @@ abstract class BaseFormPage extends ConsumerWidget {
     );
   }
 
-  /// Handle continue button with sync
+  /// Handle continue button
   void _handleContinue(BuildContext context, WidgetRef ref) async {
-    final service = ref.read(userFormServiceProvider.notifier);
-    
-    // Ensure currentStep is synced before moving to next step
-    await service.syncCurrentStep(stepNumber);
-    
-    // Call the page-specific onContinue
+    // Call the page-specific onContinue directly
+    // The step validation will be handled in the service
     await onContinue(context, ref);
   }
 
   /// Handle back navigation with proper GoRouter routing
   void _handleBackNavigation(BuildContext context, WidgetRef ref) async {
     final service = ref.read(userFormServiceProvider.notifier);
-    
-    // Ensure currentStep is synced before moving to previous step
-    await service.syncCurrentStep(stepNumber);
     
     final previousRoute = await service.moveToPreviousStep();
     context.go(previousRoute);

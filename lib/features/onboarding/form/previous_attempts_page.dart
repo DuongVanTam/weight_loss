@@ -34,6 +34,12 @@ class PreviousAttemptsPage extends BaseFormPage {
   @override
   Future<void> onContinue(BuildContext context, WidgetRef ref) async {
     final service = ref.read(userFormServiceProvider.notifier);
+    
+    // Save previous attempts data (temporary value for now)
+    // await service.updatePreviousAttempts(false, null); // TODO: Get from form input
+
+    
+    // Navigate to next step
     final nextRoute = await service.moveToNextStep();
     context.go(nextRoute);
   }

@@ -34,6 +34,12 @@ class TargetWeightPage extends BaseFormPage {
   @override
   Future<void> onContinue(BuildContext context, WidgetRef ref) async {
     final service = ref.read(userFormServiceProvider.notifier);
+    
+    // Save target weight data (temporary value for now)
+    // await service.updateTargetWeight(60.0); // TODO: Get from form input
+
+    
+    // Navigate to next step
     final nextRoute = await service.moveToNextStep();
     context.go(nextRoute);
   }
