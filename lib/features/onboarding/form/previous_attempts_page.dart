@@ -14,7 +14,7 @@ class PreviousAttemptsPage extends BaseFormPage {
   String get subtitle => 'Thông tin này giúp chúng tôi hiểu rõ hơn về hành trình của bạn.';
 
   @override
-  int get stepNumber => 3;
+  int get stepNumber => 4;
 
   @override
   Widget buildFormContent(BuildContext context, WidgetRef ref) {
@@ -36,7 +36,7 @@ class PreviousAttemptsPage extends BaseFormPage {
     final service = ref.read(userFormServiceProvider.notifier);
     
     // Save previous attempts data (temporary value for now)
-    // await service.updatePreviousAttempts(false, null); // TODO: Get from form input
+    await service.updatePreviousAttempts(false, null); // TODO: Get from form input
 
     
     // Navigate to next step

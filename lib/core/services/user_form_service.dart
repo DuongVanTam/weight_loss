@@ -13,6 +13,8 @@ class UserFormService extends _$UserFormService {
 
   @override
   UserProfile build() {
+    // Load profile asynchronously, but return default state immediately
+    // The actual loading will update the state via _loadUserProfile()
     _loadUserProfile();
     return const UserProfile(); // Default currentStep is now 1
   }
@@ -26,11 +28,19 @@ class UserFormService extends _$UserFormService {
       if (profileData != null) {
         final profile = UserProfile.fromJson(profileData);
         state = profile;
+        print('DEBUG: _loadUserProfile() - loaded profile with currentStep: ${profile.currentStep}');
+      } else {
+        print('DEBUG: _loadUserProfile() - no saved profile found, using defaults');
       }
     } catch (e) {
       // Handle error - keep default state
       print('Error loading user profile: $e');
     }
+  }
+  
+  /// Initialize and wait for user profile to load
+  Future<void> initializeProfile() async {
+    await _loadUserProfile();
   }
 
   /// Save current profile to local storage
@@ -43,7 +53,16 @@ class UserFormService extends _$UserFormService {
     }
   }
 
-  /// Update current weight (Step 1)
+  /// Update height (Step 1)
+  Future<void> updateHeight(double height) async {
+    state = state.copyWith(
+      height: height,
+      updatedAt: DateTime.now(),
+    );
+    await _saveUserProfile();
+  }
+
+  /// Update current weight (Step 2)
   Future<void> updateCurrentWeight(double weight) async {
     state = state.copyWith(
       currentWeight: weight,
@@ -52,7 +71,7 @@ class UserFormService extends _$UserFormService {
     await _saveUserProfile();
   }
 
-  /// Update target weight (Step 2)
+  /// Update target weight (Step 3)
   Future<void> updateTargetWeight(double weight) async {
     state = state.copyWith(
       targetWeight: weight,
@@ -61,7 +80,7 @@ class UserFormService extends _$UserFormService {
     await _saveUserProfile();
   }
 
-  /// Update previous attempts (Step 3)
+  /// Update previous attempts (Step 4)
   Future<void> updatePreviousAttempts(bool hasAttempts, String? details) async {
     state = state.copyWith(
       hasPreviousAttempts: hasAttempts,
@@ -71,7 +90,7 @@ class UserFormService extends _$UserFormService {
     await _saveUserProfile();
   }
 
-  /// Update birth year (Step 4)
+  /// Update birth year (Step 5)
   Future<void> updateBirthYear(int year) async {
     state = state.copyWith(
       birthYear: year,
@@ -80,14 +99,6 @@ class UserFormService extends _$UserFormService {
     await _saveUserProfile();
   }
 
-  /// Update height (Step 5)
-  Future<void> updateHeight(double height) async {
-    state = state.copyWith(
-      height: height,
-      updatedAt: DateTime.now(),
-    );
-    await _saveUserProfile();
-  }
 
   /// Update target areas (Step 6)
   Future<void> updateTargetAreas(List<TargetArea> areas) async {
@@ -181,11 +192,13 @@ class UserFormService extends _$UserFormService {
 
   /// Complete the form
   Future<void> completeForm() async {
+    // Mark form as completed by setting currentStep beyond the last step
     state = state.copyWith(
-      currentStep: 15,
+      currentStep: 16, // 16 > 15, so isFormCompleted will return true
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
+    print('DEBUG: completeForm() - form marked as completed, currentStep: ${state.currentStep}');
   }
 
   /// Reset form data
@@ -198,6 +211,13 @@ class UserFormService extends _$UserFormService {
 
   /// Get route for current step (used for navigation after loading)
   String getNextStepRoute() {
+    // Return route for the current step the user should be on
+    // This is used when resuming the onboarding flow
+    return _getStepRoute(state.currentStep);
+  }
+  
+  /// Get route for the current step (alias for better clarity)
+  String getCurrentStepRoute() {
     return _getStepRoute(state.currentStep);
   }
 
@@ -226,15 +246,15 @@ class UserFormService extends _$UserFormService {
     // stepNumber is 1-based to match UI stepNumber
     switch (stepNumber) {
       case 1:
-        return '/form/current-weight';
-      case 2:
-        return '/form/target-weight';
-      case 3:
-        return '/form/previous-attempts';
-      case 4:
-        return '/form/birth-year';
-      case 5:
         return '/form/height';
+      case 2:
+        return '/form/current-weight';
+      case 3:
+        return '/form/target-weight';
+      case 4:
+        return '/form/previous-attempts';
+      case 5:
+        return '/form/birth-year';
       case 6:
         return '/form/target-areas';
       case 7:
@@ -287,9 +307,14 @@ class UserFormService extends _$UserFormService {
       return '/form/summary';
     }
     
+    // Mark current step as completed and move to next step
+    final updatedCompletedSteps = Map<int, bool>.from(state.completedSteps);
+    updatedCompletedSteps[currentStep] = true;
+    
     // Update state immediately
     state = state.copyWith(
       currentStep: nextStep,
+      completedSteps: updatedCompletedSteps,
       updatedAt: DateTime.now(),
     );
     

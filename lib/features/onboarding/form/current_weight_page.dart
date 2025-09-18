@@ -14,7 +14,7 @@ class CurrentWeightPage extends BaseFormPage {
   String get subtitle => 'Hãy cho chúng tôi biết cân nặng hiện tại để tạo kế hoạch phù hợp.';
 
   @override
-  int get stepNumber => 1;
+  int get stepNumber => 2;
 
   @override
   Widget buildFormContent(BuildContext context, WidgetRef ref) {

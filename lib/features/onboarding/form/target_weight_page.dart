@@ -14,7 +14,7 @@ class TargetWeightPage extends BaseFormPage {
   String get subtitle => 'Bạn muốn đạt được cân nặng bao nhiêu?';
 
   @override
-  int get stepNumber => 2;
+  int get stepNumber => 3;
 
   @override
   Widget buildFormContent(BuildContext context, WidgetRef ref) {
@@ -36,7 +36,7 @@ class TargetWeightPage extends BaseFormPage {
     final service = ref.read(userFormServiceProvider.notifier);
     
     // Save target weight data (temporary value for now)
-    // await service.updateTargetWeight(60.0); // TODO: Get from form input
+    await service.updateTargetWeight(60.0); // TODO: Get from form input
 
     
     // Navigate to next step

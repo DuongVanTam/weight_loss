@@ -14,7 +14,7 @@ class BirthYearPage extends BaseFormPage {
   String get subtitle => 'Tuổi tác giúp chúng tôi tính toán chính xác hơn.';
 
   @override
-  int get stepNumber => 4;
+  int get stepNumber => 5;
 
   @override
   Widget buildFormContent(BuildContext context, WidgetRef ref) {
@@ -34,6 +34,11 @@ class BirthYearPage extends BaseFormPage {
   @override
   Future<void> onContinue(BuildContext context, WidgetRef ref) async {
     final service = ref.read(userFormServiceProvider.notifier);
+    
+    // Save birth year data (temporary value for now)
+    await service.updateBirthYear(1990); // TODO: Get from form input
+    
+    // Navigate to next step
     final nextRoute = await service.moveToNextStep();
     context.go(nextRoute);
   }

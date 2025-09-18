@@ -52,6 +52,7 @@ mixin _$UserProfile {
       throw _privateConstructorUsedError; // Step 15: Areas to avoid (injuries)
   List<String> get avoidAreas => throw _privateConstructorUsedError; // Metadata
   int get currentStep => throw _privateConstructorUsedError;
+  Map<int, bool> get completedSteps => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -90,6 +91,7 @@ abstract class $UserProfileCopyWith<$Res> {
     List<Equipment> availableEquipment,
     List<String> avoidAreas,
     int currentStep,
+    Map<int, bool> completedSteps,
     DateTime? createdAt,
     DateTime? updatedAt,
   });
@@ -127,6 +129,7 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? availableEquipment = null,
     Object? avoidAreas = null,
     Object? currentStep = null,
+    Object? completedSteps = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -200,6 +203,10 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
                 ? _value.currentStep
                 : currentStep // ignore: cast_nullable_to_non_nullable
                       as int,
+            completedSteps: null == completedSteps
+                ? _value.completedSteps
+                : completedSteps // ignore: cast_nullable_to_non_nullable
+                      as Map<int, bool>,
             createdAt: freezed == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
@@ -241,6 +248,7 @@ abstract class _$$UserProfileImplCopyWith<$Res>
     List<Equipment> availableEquipment,
     List<String> avoidAreas,
     int currentStep,
+    Map<int, bool> completedSteps,
     DateTime? createdAt,
     DateTime? updatedAt,
   });
@@ -277,6 +285,7 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? availableEquipment = null,
     Object? avoidAreas = null,
     Object? currentStep = null,
+    Object? completedSteps = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -350,6 +359,10 @@ class __$$UserProfileImplCopyWithImpl<$Res>
             ? _value.currentStep
             : currentStep // ignore: cast_nullable_to_non_nullable
                   as int,
+        completedSteps: null == completedSteps
+            ? _value._completedSteps
+            : completedSteps // ignore: cast_nullable_to_non_nullable
+                  as Map<int, bool>,
         createdAt: freezed == createdAt
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
@@ -384,12 +397,14 @@ class _$UserProfileImpl implements _UserProfile {
     final List<Equipment> availableEquipment = const [],
     final List<String> avoidAreas = const [],
     this.currentStep = 1,
+    final Map<int, bool> completedSteps = const {},
     this.createdAt,
     this.updatedAt,
   }) : _targetAreas = targetAreas,
        _workoutPreferences = workoutPreferences,
        _availableEquipment = availableEquipment,
-       _avoidAreas = avoidAreas;
+       _avoidAreas = avoidAreas,
+       _completedSteps = completedSteps;
 
   factory _$UserProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserProfileImplFromJson(json);
@@ -479,6 +494,15 @@ class _$UserProfileImpl implements _UserProfile {
   @override
   @JsonKey()
   final int currentStep;
+  final Map<int, bool> _completedSteps;
+  @override
+  @JsonKey()
+  Map<int, bool> get completedSteps {
+    if (_completedSteps is EqualUnmodifiableMapView) return _completedSteps;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_completedSteps);
+  }
+
   @override
   final DateTime? createdAt;
   @override
@@ -486,7 +510,7 @@ class _$UserProfileImpl implements _UserProfile {
 
   @override
   String toString() {
-    return 'UserProfile(currentWeight: $currentWeight, targetWeight: $targetWeight, hasPreviousAttempts: $hasPreviousAttempts, previousAttemptsDetails: $previousAttemptsDetails, birthYear: $birthYear, height: $height, targetAreas: $targetAreas, currentBodyShape: $currentBodyShape, targetBodyShape: $targetBodyShape, mealFrequency: $mealFrequency, hasRegularEatingSchedule: $hasRegularEatingSchedule, activityLevel: $activityLevel, workoutPreferences: $workoutPreferences, workoutLocation: $workoutLocation, availableEquipment: $availableEquipment, avoidAreas: $avoidAreas, currentStep: $currentStep, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserProfile(currentWeight: $currentWeight, targetWeight: $targetWeight, hasPreviousAttempts: $hasPreviousAttempts, previousAttemptsDetails: $previousAttemptsDetails, birthYear: $birthYear, height: $height, targetAreas: $targetAreas, currentBodyShape: $currentBodyShape, targetBodyShape: $targetBodyShape, mealFrequency: $mealFrequency, hasRegularEatingSchedule: $hasRegularEatingSchedule, activityLevel: $activityLevel, workoutPreferences: $workoutPreferences, workoutLocation: $workoutLocation, availableEquipment: $availableEquipment, avoidAreas: $avoidAreas, currentStep: $currentStep, completedSteps: $completedSteps, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -541,6 +565,10 @@ class _$UserProfileImpl implements _UserProfile {
             ) &&
             (identical(other.currentStep, currentStep) ||
                 other.currentStep == currentStep) &&
+            const DeepCollectionEquality().equals(
+              other._completedSteps,
+              _completedSteps,
+            ) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -568,6 +596,7 @@ class _$UserProfileImpl implements _UserProfile {
     const DeepCollectionEquality().hash(_availableEquipment),
     const DeepCollectionEquality().hash(_avoidAreas),
     currentStep,
+    const DeepCollectionEquality().hash(_completedSteps),
     createdAt,
     updatedAt,
   ]);
@@ -605,6 +634,7 @@ abstract class _UserProfile implements UserProfile {
     final List<Equipment> availableEquipment,
     final List<String> avoidAreas,
     final int currentStep,
+    final Map<int, bool> completedSteps,
     final DateTime? createdAt,
     final DateTime? updatedAt,
   }) = _$UserProfileImpl;
@@ -647,6 +677,8 @@ abstract class _UserProfile implements UserProfile {
   List<String> get avoidAreas; // Metadata
   @override
   int get currentStep;
+  @override
+  Map<int, bool> get completedSteps;
   @override
   DateTime? get createdAt;
   @override

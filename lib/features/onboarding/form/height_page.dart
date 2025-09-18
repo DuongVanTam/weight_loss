@@ -14,7 +14,7 @@ class HeightPage extends BaseFormPage {
   String get subtitle => 'Chiều cao giúp tính toán BMI và lượng calo cần thiết.';
 
   @override
-  int get stepNumber => 5;
+  int get stepNumber => 1;
 
   @override
   Widget buildFormContent(BuildContext context, WidgetRef ref) {
@@ -34,6 +34,11 @@ class HeightPage extends BaseFormPage {
   @override
   Future<void> onContinue(BuildContext context, WidgetRef ref) async {
     final service = ref.read(userFormServiceProvider.notifier);
+    
+    // Save height data (temporary value for now)
+    await service.updateHeight(170.0); // TODO: Get from form input
+    
+    // Navigate to next step
     final nextRoute = await service.moveToNextStep();
     context.go(nextRoute);
   }

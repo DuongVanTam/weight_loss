@@ -83,22 +83,34 @@ class _SplashPageState extends ConsumerState<SplashPage>
     await _progressAnimationController.forward();
     
     if (!mounted) return;
-    _determineNavigationRoute();
+    await _determineNavigationRoute();
   }
 
-  void _determineNavigationRoute() {
+  Future<void> _determineNavigationRoute() async {
     final formService = ref.read(userFormServiceProvider.notifier);
+    
+    // Wait for user profile to be loaded from storage
+    await formService.initializeProfile();
+    
     final bool hasSeenIntro = LocalStorageService.hasSeenIntro();
+    final bool isCompleted = formService.isFormCompleted;
+    final userProfile = ref.read(userFormServiceProvider);
+    final int currentStep = userProfile.currentStep;
+    
+    print('DEBUG: _determineNavigationRoute() - currentStep: $currentStep, isCompleted: $isCompleted, hasSeenIntro: $hasSeenIntro');
 
-    if (formService.isFormCompleted) {
+    if (isCompleted) {
       // User has completed setup, go to dashboard
+      print('DEBUG: _determineNavigationRoute() - form completed, going to dashboard');
       context.go(AppRouter.dashboard);
     } else if (hasSeenIntro) {
       // User has seen intro but hasn't completed setup, continue from where they left off
       final nextRoute = formService.getNextStepRoute();
+      print('DEBUG: _determineNavigationRoute() - resuming at route: $nextRoute');
       context.go(nextRoute);
     } else {
       // First time user, show intro
+      print('DEBUG: _determineNavigationRoute() - first time user, going to intro');
       context.go(AppRouter.intro);
     }
   }

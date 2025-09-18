@@ -140,6 +140,7 @@ class UserProfile with _$UserProfile {
     
     // Metadata
     @Default(1) int currentStep,
+    @Default({}) Map<int, bool> completedSteps,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _UserProfile;

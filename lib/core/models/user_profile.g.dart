@@ -56,6 +56,11 @@ _$UserProfileImpl _$$UserProfileImplFromJson(Map<String, dynamic> json) =>
               .toList() ??
           const [],
       currentStep: (json['current_step'] as num?)?.toInt() ?? 1,
+      completedSteps:
+          (json['completed_steps'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(int.parse(k), e as bool),
+          ) ??
+          const {},
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -97,6 +102,9 @@ Map<String, dynamic> _$$UserProfileImplToJson(_$UserProfileImpl instance) =>
           .toList(),
       'avoid_areas': instance.avoidAreas,
       'current_step': instance.currentStep,
+      'completed_steps': instance.completedSteps.map(
+        (k, e) => MapEntry(k.toString(), e),
+      ),
       if (instance.createdAt?.toIso8601String() case final value?)
         'created_at': value,
       if (instance.updatedAt?.toIso8601String() case final value?)
