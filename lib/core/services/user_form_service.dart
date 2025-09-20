@@ -13,6 +13,7 @@ class UserFormService extends _$UserFormService {
 
   @override
   UserProfile build() {
+    ref.keepAlive();
     // Load profile asynchronously, but return default state immediately
     // The actual loading will update the state via _loadUserProfile()
     _loadUserProfile();
