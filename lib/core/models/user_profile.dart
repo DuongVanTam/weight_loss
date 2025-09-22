@@ -40,14 +40,37 @@ enum WorkoutLocation {
 
 /// Enum for body shape (current and target)
 enum BodyShape {
-  apple('Táo'),
-  pear('Lê'),
-  hourglass('Đồng hồ cát'),
-  rectangle('Hình chữ nhật'),
-  triangle('Tam giác ngược');
+  shape1('Rất thon gọn', 'Cơ thể rất thon gọn, ít mỡ thừa, cơ bắp rõ nét'),
+  shape2('Thon gọn', 'Cơ thể thon gọn, tỷ lệ cân đối, ít mỡ thừa'),
+  shape3('Bình thường', 'Cơ thể bình thường, tỷ lệ cân đối, một chút mỡ thừa'),
+  shape4('Hơi đầy đặn', 'Cơ thể hơi đầy đặn, có mỡ thừa ở một số vùng'),
+  shape5('Đầy đặn', 'Cơ thể đầy đặn, mỡ thừa rõ rệt ở nhiều vùng'),
+  shape6('Rất đầy đặn', 'Cơ thể rất đầy đặn, cần giảm cân để cải thiện sức khỏe');
 
-  const BodyShape(this.displayName);
+  const BodyShape(this.displayName, this.description);
   final String displayName;
+  final String description;
+  
+  /// Get the image asset path for this body shape
+  String get imagePath {
+    switch (this) {
+      case BodyShape.shape1:
+        return 'assets/images/body-shape/1.png';
+      case BodyShape.shape2:
+        return 'assets/images/body-shape/2.png';
+      case BodyShape.shape3:
+        return 'assets/images/body-shape/3.png';
+      case BodyShape.shape4:
+        return 'assets/images/body-shape/4.png';
+      case BodyShape.shape5:
+        return 'assets/images/body-shape/5.png';
+      case BodyShape.shape6:
+        return 'assets/images/body-shape/6.png';
+    }
+  }
+  
+  /// Get the shape number (1-6)
+  int get shapeNumber => index + 1;
 }
 
 /// Enum for target areas to reduce fat
@@ -77,8 +100,8 @@ enum MealFrequency {
 /// Enum for equipment availability
 enum Equipment {
   dumbbells('Tạ đơn'),
-  resistance_bands('Dây kháng lực'),
-  yoga_mat('Thảm yoga'),
+  resistanceBands('Dây kháng lực'),
+  yogaMat('Thảm yoga'),
   kettlebells('Tạ ấm'),
   barbell('Tạ đòn'),
   none('Không có dụng cụ');

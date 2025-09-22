@@ -57,4 +57,5 @@ flutter:
   assets:
     - lib/data/mock/
     - assets/images/
+    - assets/images/body-shape/
     - assets/icons/

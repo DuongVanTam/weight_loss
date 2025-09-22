@@ -120,11 +120,12 @@ const _$TargetAreaEnumMap = {
 };
 
 const _$BodyShapeEnumMap = {
-  BodyShape.apple: 'apple',
-  BodyShape.pear: 'pear',
-  BodyShape.hourglass: 'hourglass',
-  BodyShape.rectangle: 'rectangle',
-  BodyShape.triangle: 'triangle',
+  BodyShape.shape1: 'shape1',
+  BodyShape.shape2: 'shape2',
+  BodyShape.shape3: 'shape3',
+  BodyShape.shape4: 'shape4',
+  BodyShape.shape5: 'shape5',
+  BodyShape.shape6: 'shape6',
 };
 
 const _$MealFrequencyEnumMap = {
@@ -160,8 +161,8 @@ const _$WorkoutLocationEnumMap = {
 
 const _$EquipmentEnumMap = {
   Equipment.dumbbells: 'dumbbells',
-  Equipment.resistance_bands: 'resistance_bands',
-  Equipment.yoga_mat: 'yoga_mat',
+  Equipment.resistanceBands: 'resistanceBands',
+  Equipment.yogaMat: 'yogaMat',
   Equipment.kettlebells: 'kettlebells',
   Equipment.barbell: 'barbell',
   Equipment.none: 'none',
