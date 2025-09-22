@@ -53,10 +53,9 @@ enum BodyShape {
 /// Enum for target areas to reduce fat
 enum TargetArea {
   belly('Bụng'),
-  thighs('Đùi'),
-  arms('Cánh tay'),
-  back('Lưng'),
-  waist('Eo'),
+  arms('Tay'),
+  glutes('Mông'),
+  legs('Chân'),
   overall('Toàn thân');
 
   const TargetArea(this.displayName);

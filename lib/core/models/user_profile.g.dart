@@ -113,10 +113,9 @@ Map<String, dynamic> _$$UserProfileImplToJson(_$UserProfileImpl instance) =>
 
 const _$TargetAreaEnumMap = {
   TargetArea.belly: 'belly',
-  TargetArea.thighs: 'thighs',
   TargetArea.arms: 'arms',
-  TargetArea.back: 'back',
-  TargetArea.waist: 'waist',
+  TargetArea.glutes: 'glutes',
+  TargetArea.legs: 'legs',
   TargetArea.overall: 'overall',
 };
 
