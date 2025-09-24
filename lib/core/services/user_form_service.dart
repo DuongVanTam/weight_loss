@@ -129,7 +129,7 @@ class UserFormService extends _$UserFormService {
   }
 
   /// Update meal frequency (Step 9)
-  Future<void> updateMealFrequency(MealFrequency frequency) async {
+  Future<void> updateMealFrequency(int frequency) async {
     state = state.copyWith(
       mealFrequency: frequency,
       updatedAt: DateTime.now(),
@@ -138,9 +138,9 @@ class UserFormService extends _$UserFormService {
   }
 
   /// Update eating schedule (Step 10)
-  Future<void> updateEatingSchedule(bool hasRegular) async {
+  Future<void> updateEatingSchedule(String schedule) async {
     state = state.copyWith(
-      hasRegularEatingSchedule: hasRegular,
+      eatingSchedule: schedule,
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();

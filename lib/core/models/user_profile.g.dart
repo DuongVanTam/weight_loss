@@ -27,11 +27,8 @@ _$UserProfileImpl _$$UserProfileImplFromJson(Map<String, dynamic> json) =>
         _$BodyShapeEnumMap,
         json['target_body_shape'],
       ),
-      mealFrequency: $enumDecodeNullable(
-        _$MealFrequencyEnumMap,
-        json['meal_frequency'],
-      ),
-      hasRegularEatingSchedule: json['has_regular_eating_schedule'] as bool?,
+      mealFrequency: (json['meal_frequency'] as num?)?.toInt(),
+      eatingSchedule: json['eating_schedule'] as String?,
       activityLevel: $enumDecodeNullable(
         _$ActivityLevelEnumMap,
         json['activity_level'],
@@ -86,10 +83,8 @@ Map<String, dynamic> _$$UserProfileImplToJson(_$UserProfileImpl instance) =>
         'current_body_shape': value,
       if (_$BodyShapeEnumMap[instance.targetBodyShape] case final value?)
         'target_body_shape': value,
-      if (_$MealFrequencyEnumMap[instance.mealFrequency] case final value?)
-        'meal_frequency': value,
-      if (instance.hasRegularEatingSchedule case final value?)
-        'has_regular_eating_schedule': value,
+      if (instance.mealFrequency case final value?) 'meal_frequency': value,
+      if (instance.eatingSchedule case final value?) 'eating_schedule': value,
       if (_$ActivityLevelEnumMap[instance.activityLevel] case final value?)
         'activity_level': value,
       'workout_preferences': instance.workoutPreferences
@@ -126,14 +121,6 @@ const _$BodyShapeEnumMap = {
   BodyShape.shape4: 'shape4',
   BodyShape.shape5: 'shape5',
   BodyShape.shape6: 'shape6',
-};
-
-const _$MealFrequencyEnumMap = {
-  MealFrequency.two: 'two',
-  MealFrequency.three: 'three',
-  MealFrequency.four: 'four',
-  MealFrequency.five: 'five',
-  MealFrequency.six: 'six',
 };
 
 const _$ActivityLevelEnumMap = {

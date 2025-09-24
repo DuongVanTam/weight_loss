@@ -140,10 +140,10 @@ class UserProfile with _$UserProfile {
     BodyShape? targetBodyShape,
     
     // Step 9: Meal frequency
-    MealFrequency? mealFrequency,
+    int? mealFrequency,
     
-    // Step 10: Regular eating schedule
-    bool? hasRegularEatingSchedule,
+    // Step 10: Eating schedule
+    String? eatingSchedule,
     
     // Step 11: Activity level
     ActivityLevel? activityLevel,

@@ -38,9 +38,9 @@ mixin _$UserProfile {
       throw _privateConstructorUsedError; // Step 8: Target body shape
   BodyShape? get targetBodyShape =>
       throw _privateConstructorUsedError; // Step 9: Meal frequency
-  MealFrequency? get mealFrequency =>
-      throw _privateConstructorUsedError; // Step 10: Regular eating schedule
-  bool? get hasRegularEatingSchedule =>
+  int? get mealFrequency =>
+      throw _privateConstructorUsedError; // Step 10: Eating schedule
+  String? get eatingSchedule =>
       throw _privateConstructorUsedError; // Step 11: Activity level
   ActivityLevel? get activityLevel =>
       throw _privateConstructorUsedError; // Step 12: Workout preferences
@@ -83,8 +83,8 @@ abstract class $UserProfileCopyWith<$Res> {
     List<TargetArea> targetAreas,
     BodyShape? currentBodyShape,
     BodyShape? targetBodyShape,
-    MealFrequency? mealFrequency,
-    bool? hasRegularEatingSchedule,
+    int? mealFrequency,
+    String? eatingSchedule,
     ActivityLevel? activityLevel,
     List<WorkoutPreference> workoutPreferences,
     WorkoutLocation? workoutLocation,
@@ -122,7 +122,7 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? currentBodyShape = freezed,
     Object? targetBodyShape = freezed,
     Object? mealFrequency = freezed,
-    Object? hasRegularEatingSchedule = freezed,
+    Object? eatingSchedule = freezed,
     Object? activityLevel = freezed,
     Object? workoutPreferences = null,
     Object? workoutLocation = freezed,
@@ -174,11 +174,11 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
             mealFrequency: freezed == mealFrequency
                 ? _value.mealFrequency
                 : mealFrequency // ignore: cast_nullable_to_non_nullable
-                      as MealFrequency?,
-            hasRegularEatingSchedule: freezed == hasRegularEatingSchedule
-                ? _value.hasRegularEatingSchedule
-                : hasRegularEatingSchedule // ignore: cast_nullable_to_non_nullable
-                      as bool?,
+                      as int?,
+            eatingSchedule: freezed == eatingSchedule
+                ? _value.eatingSchedule
+                : eatingSchedule // ignore: cast_nullable_to_non_nullable
+                      as String?,
             activityLevel: freezed == activityLevel
                 ? _value.activityLevel
                 : activityLevel // ignore: cast_nullable_to_non_nullable
@@ -240,8 +240,8 @@ abstract class _$$UserProfileImplCopyWith<$Res>
     List<TargetArea> targetAreas,
     BodyShape? currentBodyShape,
     BodyShape? targetBodyShape,
-    MealFrequency? mealFrequency,
-    bool? hasRegularEatingSchedule,
+    int? mealFrequency,
+    String? eatingSchedule,
     ActivityLevel? activityLevel,
     List<WorkoutPreference> workoutPreferences,
     WorkoutLocation? workoutLocation,
@@ -278,7 +278,7 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? currentBodyShape = freezed,
     Object? targetBodyShape = freezed,
     Object? mealFrequency = freezed,
-    Object? hasRegularEatingSchedule = freezed,
+    Object? eatingSchedule = freezed,
     Object? activityLevel = freezed,
     Object? workoutPreferences = null,
     Object? workoutLocation = freezed,
@@ -330,11 +330,11 @@ class __$$UserProfileImplCopyWithImpl<$Res>
         mealFrequency: freezed == mealFrequency
             ? _value.mealFrequency
             : mealFrequency // ignore: cast_nullable_to_non_nullable
-                  as MealFrequency?,
-        hasRegularEatingSchedule: freezed == hasRegularEatingSchedule
-            ? _value.hasRegularEatingSchedule
-            : hasRegularEatingSchedule // ignore: cast_nullable_to_non_nullable
-                  as bool?,
+                  as int?,
+        eatingSchedule: freezed == eatingSchedule
+            ? _value.eatingSchedule
+            : eatingSchedule // ignore: cast_nullable_to_non_nullable
+                  as String?,
         activityLevel: freezed == activityLevel
             ? _value.activityLevel
             : activityLevel // ignore: cast_nullable_to_non_nullable
@@ -390,7 +390,7 @@ class _$UserProfileImpl implements _UserProfile {
     this.currentBodyShape,
     this.targetBodyShape,
     this.mealFrequency,
-    this.hasRegularEatingSchedule,
+    this.eatingSchedule,
     this.activityLevel,
     final List<WorkoutPreference> workoutPreferences = const [],
     this.workoutLocation,
@@ -445,10 +445,10 @@ class _$UserProfileImpl implements _UserProfile {
   final BodyShape? targetBodyShape;
   // Step 9: Meal frequency
   @override
-  final MealFrequency? mealFrequency;
-  // Step 10: Regular eating schedule
+  final int? mealFrequency;
+  // Step 10: Eating schedule
   @override
-  final bool? hasRegularEatingSchedule;
+  final String? eatingSchedule;
   // Step 11: Activity level
   @override
   final ActivityLevel? activityLevel;
@@ -510,7 +510,7 @@ class _$UserProfileImpl implements _UserProfile {
 
   @override
   String toString() {
-    return 'UserProfile(currentWeight: $currentWeight, targetWeight: $targetWeight, hasPreviousAttempts: $hasPreviousAttempts, previousAttemptsDetails: $previousAttemptsDetails, birthYear: $birthYear, height: $height, targetAreas: $targetAreas, currentBodyShape: $currentBodyShape, targetBodyShape: $targetBodyShape, mealFrequency: $mealFrequency, hasRegularEatingSchedule: $hasRegularEatingSchedule, activityLevel: $activityLevel, workoutPreferences: $workoutPreferences, workoutLocation: $workoutLocation, availableEquipment: $availableEquipment, avoidAreas: $avoidAreas, currentStep: $currentStep, completedSteps: $completedSteps, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserProfile(currentWeight: $currentWeight, targetWeight: $targetWeight, hasPreviousAttempts: $hasPreviousAttempts, previousAttemptsDetails: $previousAttemptsDetails, birthYear: $birthYear, height: $height, targetAreas: $targetAreas, currentBodyShape: $currentBodyShape, targetBodyShape: $targetBodyShape, mealFrequency: $mealFrequency, eatingSchedule: $eatingSchedule, activityLevel: $activityLevel, workoutPreferences: $workoutPreferences, workoutLocation: $workoutLocation, availableEquipment: $availableEquipment, avoidAreas: $avoidAreas, currentStep: $currentStep, completedSteps: $completedSteps, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -542,11 +542,8 @@ class _$UserProfileImpl implements _UserProfile {
                 other.targetBodyShape == targetBodyShape) &&
             (identical(other.mealFrequency, mealFrequency) ||
                 other.mealFrequency == mealFrequency) &&
-            (identical(
-                  other.hasRegularEatingSchedule,
-                  hasRegularEatingSchedule,
-                ) ||
-                other.hasRegularEatingSchedule == hasRegularEatingSchedule) &&
+            (identical(other.eatingSchedule, eatingSchedule) ||
+                other.eatingSchedule == eatingSchedule) &&
             (identical(other.activityLevel, activityLevel) ||
                 other.activityLevel == activityLevel) &&
             const DeepCollectionEquality().equals(
@@ -589,7 +586,7 @@ class _$UserProfileImpl implements _UserProfile {
     currentBodyShape,
     targetBodyShape,
     mealFrequency,
-    hasRegularEatingSchedule,
+    eatingSchedule,
     activityLevel,
     const DeepCollectionEquality().hash(_workoutPreferences),
     workoutLocation,
@@ -626,8 +623,8 @@ abstract class _UserProfile implements UserProfile {
     final List<TargetArea> targetAreas,
     final BodyShape? currentBodyShape,
     final BodyShape? targetBodyShape,
-    final MealFrequency? mealFrequency,
-    final bool? hasRegularEatingSchedule,
+    final int? mealFrequency,
+    final String? eatingSchedule,
     final ActivityLevel? activityLevel,
     final List<WorkoutPreference> workoutPreferences,
     final WorkoutLocation? workoutLocation,
@@ -662,9 +659,9 @@ abstract class _UserProfile implements UserProfile {
   @override
   BodyShape? get targetBodyShape; // Step 9: Meal frequency
   @override
-  MealFrequency? get mealFrequency; // Step 10: Regular eating schedule
+  int? get mealFrequency; // Step 10: Eating schedule
   @override
-  bool? get hasRegularEatingSchedule; // Step 11: Activity level
+  String? get eatingSchedule; // Step 11: Activity level
   @override
   ActivityLevel? get activityLevel; // Step 12: Workout preferences
   @override

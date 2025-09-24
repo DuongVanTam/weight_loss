@@ -83,8 +83,8 @@ class FormSummaryPage extends ConsumerWidget {
                             _buildSummarySection(
                               'Thói quen ăn uống',
                               [
-                                'Số bữa ăn: ${userProfile.mealFrequency?.displayName ?? "Chưa chọn"}',
-                                'Ăn đúng giờ: ${userProfile.hasRegularEatingSchedule == true ? "Có" : userProfile.hasRegularEatingSchedule == false ? "Không" : "Chưa chọn"}',
+                                'Số bữa ăn: ${_getMealFrequencyDisplay(userProfile.mealFrequency)}',
+                                'Lịch trình ăn uống: ${_getEatingScheduleDisplay(userProfile.eatingSchedule)}',
                               ],
                             ),
                             
@@ -177,6 +177,42 @@ class FormSummaryPage extends ConsumerWidget {
         )),
       ],
     );
+  }
+
+  String _getMealFrequencyDisplay(int? frequency) {
+    if (frequency == null) return "Chưa chọn";
+    
+    switch (frequency) {
+      case 1:
+        return "1 bữa/ngày";
+      case 2:
+        return "2 bữa/ngày";
+      case 3:
+        return "3 bữa/ngày";
+      case 4:
+        return "4-5 bữa/ngày";
+      case 6:
+        return "6+ bữa/ngày";
+      default:
+        return "$frequency bữa/ngày";
+    }
+  }
+
+  String _getEatingScheduleDisplay(String? schedule) {
+    if (schedule == null) return "Chưa chọn";
+    
+    switch (schedule) {
+      case 'regular':
+        return "Rất đúng giờ";
+      case 'irregular':
+        return "Không thường xuyên";
+      case 'skipMeals':
+        return "Thường bỏ bữa";
+      case 'lateEater':
+        return "Ăn muộn";
+      default:
+        return "Chưa chọn";
+    }
   }
 
   void _createWorkoutPlan(BuildContext context, WidgetRef ref) {
