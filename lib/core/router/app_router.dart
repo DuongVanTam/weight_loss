@@ -18,10 +18,6 @@ import '../../features/onboarding/form/target_body_shape_page.dart';
 import '../../features/onboarding/form/meal_frequency_page.dart';
 import '../../features/onboarding/form/eating_schedule_page.dart';
 import '../../features/onboarding/form/activity_level_page.dart';
-import '../../features/onboarding/form/workout_preferences_page.dart';
-import '../../features/onboarding/form/workout_location_page.dart';
-import '../../features/onboarding/form/available_equipment_page.dart';
-import '../../features/onboarding/form/avoid_areas_page.dart';
 import '../../features/onboarding/form/form_summary_page.dart';
 
 /// Application router configuration using GoRouter
@@ -45,10 +41,6 @@ class AppRouter {
   static const String formMealFrequency = '/form/meal-frequency';
   static const String formEatingSchedule = '/form/eating-schedule';
   static const String formActivityLevel = '/form/activity-level';
-  static const String formWorkoutPreferences = '/form/workout-preferences';
-  static const String formWorkoutLocation = '/form/workout-location';
-  static const String formAvailableEquipment = '/form/available-equipment';
-  static const String formAvoidAreas = '/form/avoid-areas';
   static const String formSummary = '/form/summary';
 
   static final GoRouter _router = GoRouter(
@@ -161,30 +153,6 @@ class AppRouter {
         path: formActivityLevel,
         name: 'form-activity-level',
         builder: (context, state) => const ActivityLevelPage(),
-      ),
-      
-      GoRoute(
-        path: formWorkoutPreferences,
-        name: 'form-workout-preferences',
-        builder: (context, state) => const WorkoutPreferencesPage(),
-      ),
-      
-      GoRoute(
-        path: formWorkoutLocation,
-        name: 'form-workout-location',
-        builder: (context, state) => const WorkoutLocationPage(),
-      ),
-      
-      GoRoute(
-        path: formAvailableEquipment,
-        name: 'form-available-equipment',
-        builder: (context, state) => const AvailableEquipmentPage(),
-      ),
-      
-      GoRoute(
-        path: formAvoidAreas,
-        name: 'form-avoid-areas',
-        builder: (context, state) => const AvoidAreasPage(),
       ),
       
       GoRoute(

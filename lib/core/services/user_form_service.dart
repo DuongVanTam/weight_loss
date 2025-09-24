@@ -155,47 +155,12 @@ class UserFormService extends _$UserFormService {
     await _saveUserProfile();
   }
 
-  /// Update workout preferences (Step 12)
-  Future<void> updateWorkoutPreferences(List<WorkoutPreference> preferences) async {
-    state = state.copyWith(
-      workoutPreferences: preferences,
-      updatedAt: DateTime.now(),
-    );
-    await _saveUserProfile();
-  }
-
-  /// Update workout location (Step 13)
-  Future<void> updateWorkoutLocation(WorkoutLocation location) async {
-    state = state.copyWith(
-      workoutLocation: location,
-      updatedAt: DateTime.now(),
-    );
-    await _saveUserProfile();
-  }
-
-  /// Update available equipment (Step 14)
-  Future<void> updateAvailableEquipment(List<Equipment> equipment) async {
-    state = state.copyWith(
-      availableEquipment: equipment,
-      updatedAt: DateTime.now(),
-    );
-    await _saveUserProfile();
-  }
-
-  /// Update avoid areas (Step 15)
-  Future<void> updateAvoidAreas(List<String> areas) async {
-    state = state.copyWith(
-      avoidAreas: areas,
-      updatedAt: DateTime.now(),
-    );
-    await _saveUserProfile();
-  }
 
   /// Complete the form
   Future<void> completeForm() async {
     // Mark form as completed by setting currentStep beyond the last step
     state = state.copyWith(
-      currentStep: 16, // 16 > 15, so isFormCompleted will return true
+      currentStep: 12, // 12 > 11, so isFormCompleted will return true
       updatedAt: DateTime.now(),
     );
     await _saveUserProfile();
@@ -268,24 +233,16 @@ class UserFormService extends _$UserFormService {
         return '/form/eating-schedule';
       case 11:
         return '/form/activity-level';
-      case 12:
-        return '/form/workout-preferences';
-      case 13:
-        return '/form/workout-location';
-      case 14:
-        return '/form/available-equipment';
-      case 15:
-        return '/form/avoid-areas';
       default:
         return '/form/summary'; // Form completed
     }
   }
 
   /// Check if form is completed
-  bool get isFormCompleted => state.currentStep > 15;
+  bool get isFormCompleted => state.currentStep > 11;
 
   /// Get completion percentage
-  double get completionPercentage => (state.currentStep / 15.0).clamp(0.0, 1.0);
+  double get completionPercentage => (state.currentStep / 11.0).clamp(0.0, 1.0);
 
   /// Skip current step and move to next (for testing/incomplete forms)
   Future<String> skipToNextStep() async {
@@ -303,7 +260,7 @@ class UserFormService extends _$UserFormService {
     print('DEBUG: moveToNextStep() - currentStep: $currentStep -> nextStep: $nextStep');
     
     // Validate that we're not exceeding the maximum step
-    if (nextStep > 15) {
+    if (nextStep > 11) {
       print('DEBUG: moveToNextStep() - reached end, going to summary');
       return '/form/summary';
     }

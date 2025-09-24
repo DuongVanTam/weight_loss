@@ -33,25 +33,6 @@ _$UserProfileImpl _$$UserProfileImplFromJson(Map<String, dynamic> json) =>
         _$ActivityLevelEnumMap,
         json['activity_level'],
       ),
-      workoutPreferences:
-          (json['workout_preferences'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(_$WorkoutPreferenceEnumMap, e))
-              .toList() ??
-          const [],
-      workoutLocation: $enumDecodeNullable(
-        _$WorkoutLocationEnumMap,
-        json['workout_location'],
-      ),
-      availableEquipment:
-          (json['available_equipment'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(_$EquipmentEnumMap, e))
-              .toList() ??
-          const [],
-      avoidAreas:
-          (json['avoid_areas'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
       currentStep: (json['current_step'] as num?)?.toInt() ?? 1,
       completedSteps:
           (json['completed_steps'] as Map<String, dynamic>?)?.map(
@@ -87,15 +68,6 @@ Map<String, dynamic> _$$UserProfileImplToJson(_$UserProfileImpl instance) =>
       if (instance.eatingSchedule case final value?) 'eating_schedule': value,
       if (_$ActivityLevelEnumMap[instance.activityLevel] case final value?)
         'activity_level': value,
-      'workout_preferences': instance.workoutPreferences
-          .map((e) => _$WorkoutPreferenceEnumMap[e]!)
-          .toList(),
-      if (_$WorkoutLocationEnumMap[instance.workoutLocation] case final value?)
-        'workout_location': value,
-      'available_equipment': instance.availableEquipment
-          .map((e) => _$EquipmentEnumMap[e]!)
-          .toList(),
-      'avoid_areas': instance.avoidAreas,
       'current_step': instance.currentStep,
       'completed_steps': instance.completedSteps.map(
         (k, e) => MapEntry(k.toString(), e),
@@ -130,35 +102,10 @@ const _$ActivityLevelEnumMap = {
   ActivityLevel.active: 'active',
 };
 
-const _$WorkoutPreferenceEnumMap = {
-  WorkoutPreference.cardio: 'cardio',
-  WorkoutPreference.hiit: 'hiit',
-  WorkoutPreference.yoga: 'yoga',
-  WorkoutPreference.strength: 'strength',
-  WorkoutPreference.pilates: 'pilates',
-  WorkoutPreference.dance: 'dance',
-};
-
-const _$WorkoutLocationEnumMap = {
-  WorkoutLocation.home: 'home',
-  WorkoutLocation.gym: 'gym',
-  WorkoutLocation.outdoor: 'outdoor',
-  WorkoutLocation.mixed: 'mixed',
-};
-
-const _$EquipmentEnumMap = {
-  Equipment.dumbbells: 'dumbbells',
-  Equipment.resistanceBands: 'resistanceBands',
-  Equipment.yogaMat: 'yogaMat',
-  Equipment.kettlebells: 'kettlebells',
-  Equipment.barbell: 'barbell',
-  Equipment.none: 'none',
-};
-
 _$FormProgressImpl _$$FormProgressImplFromJson(Map<String, dynamic> json) =>
     _$FormProgressImpl(
       currentStep: (json['current_step'] as num?)?.toInt() ?? 0,
-      totalSteps: (json['total_steps'] as num?)?.toInt() ?? 15,
+      totalSteps: (json['total_steps'] as num?)?.toInt() ?? 11,
       completedSteps:
           (json['completed_steps'] as Map<String, dynamic>?)?.map(
             (k, e) => MapEntry(int.parse(k), e as bool),

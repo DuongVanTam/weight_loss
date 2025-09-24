@@ -94,8 +94,6 @@ class FormSummaryPage extends ConsumerWidget {
                               'Luyện tập',
                               [
                                 'Mức độ vận động: ${userProfile.activityLevel?.displayName ?? "Chưa chọn"}',
-                                'Địa điểm tập: ${userProfile.workoutLocation?.displayName ?? "Chưa chọn"}',
-                                'Sở thích: ${userProfile.workoutPreferences.map((e) => e.displayName).join(", ")}',
                               ],
                             ),
                           ],

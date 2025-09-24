@@ -43,14 +43,7 @@ mixin _$UserProfile {
   String? get eatingSchedule =>
       throw _privateConstructorUsedError; // Step 11: Activity level
   ActivityLevel? get activityLevel =>
-      throw _privateConstructorUsedError; // Step 12: Workout preferences
-  List<WorkoutPreference> get workoutPreferences =>
-      throw _privateConstructorUsedError; // Step 13: Workout location
-  WorkoutLocation? get workoutLocation =>
-      throw _privateConstructorUsedError; // Step 14: Available equipment
-  List<Equipment> get availableEquipment =>
-      throw _privateConstructorUsedError; // Step 15: Areas to avoid (injuries)
-  List<String> get avoidAreas => throw _privateConstructorUsedError; // Metadata
+      throw _privateConstructorUsedError; // Metadata
   int get currentStep => throw _privateConstructorUsedError;
   Map<int, bool> get completedSteps => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -86,10 +79,6 @@ abstract class $UserProfileCopyWith<$Res> {
     int? mealFrequency,
     String? eatingSchedule,
     ActivityLevel? activityLevel,
-    List<WorkoutPreference> workoutPreferences,
-    WorkoutLocation? workoutLocation,
-    List<Equipment> availableEquipment,
-    List<String> avoidAreas,
     int currentStep,
     Map<int, bool> completedSteps,
     DateTime? createdAt,
@@ -124,10 +113,6 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? mealFrequency = freezed,
     Object? eatingSchedule = freezed,
     Object? activityLevel = freezed,
-    Object? workoutPreferences = null,
-    Object? workoutLocation = freezed,
-    Object? availableEquipment = null,
-    Object? avoidAreas = null,
     Object? currentStep = null,
     Object? completedSteps = null,
     Object? createdAt = freezed,
@@ -183,22 +168,6 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
                 ? _value.activityLevel
                 : activityLevel // ignore: cast_nullable_to_non_nullable
                       as ActivityLevel?,
-            workoutPreferences: null == workoutPreferences
-                ? _value.workoutPreferences
-                : workoutPreferences // ignore: cast_nullable_to_non_nullable
-                      as List<WorkoutPreference>,
-            workoutLocation: freezed == workoutLocation
-                ? _value.workoutLocation
-                : workoutLocation // ignore: cast_nullable_to_non_nullable
-                      as WorkoutLocation?,
-            availableEquipment: null == availableEquipment
-                ? _value.availableEquipment
-                : availableEquipment // ignore: cast_nullable_to_non_nullable
-                      as List<Equipment>,
-            avoidAreas: null == avoidAreas
-                ? _value.avoidAreas
-                : avoidAreas // ignore: cast_nullable_to_non_nullable
-                      as List<String>,
             currentStep: null == currentStep
                 ? _value.currentStep
                 : currentStep // ignore: cast_nullable_to_non_nullable
@@ -243,10 +212,6 @@ abstract class _$$UserProfileImplCopyWith<$Res>
     int? mealFrequency,
     String? eatingSchedule,
     ActivityLevel? activityLevel,
-    List<WorkoutPreference> workoutPreferences,
-    WorkoutLocation? workoutLocation,
-    List<Equipment> availableEquipment,
-    List<String> avoidAreas,
     int currentStep,
     Map<int, bool> completedSteps,
     DateTime? createdAt,
@@ -280,10 +245,6 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? mealFrequency = freezed,
     Object? eatingSchedule = freezed,
     Object? activityLevel = freezed,
-    Object? workoutPreferences = null,
-    Object? workoutLocation = freezed,
-    Object? availableEquipment = null,
-    Object? avoidAreas = null,
     Object? currentStep = null,
     Object? completedSteps = null,
     Object? createdAt = freezed,
@@ -339,22 +300,6 @@ class __$$UserProfileImplCopyWithImpl<$Res>
             ? _value.activityLevel
             : activityLevel // ignore: cast_nullable_to_non_nullable
                   as ActivityLevel?,
-        workoutPreferences: null == workoutPreferences
-            ? _value._workoutPreferences
-            : workoutPreferences // ignore: cast_nullable_to_non_nullable
-                  as List<WorkoutPreference>,
-        workoutLocation: freezed == workoutLocation
-            ? _value.workoutLocation
-            : workoutLocation // ignore: cast_nullable_to_non_nullable
-                  as WorkoutLocation?,
-        availableEquipment: null == availableEquipment
-            ? _value._availableEquipment
-            : availableEquipment // ignore: cast_nullable_to_non_nullable
-                  as List<Equipment>,
-        avoidAreas: null == avoidAreas
-            ? _value._avoidAreas
-            : avoidAreas // ignore: cast_nullable_to_non_nullable
-                  as List<String>,
         currentStep: null == currentStep
             ? _value.currentStep
             : currentStep // ignore: cast_nullable_to_non_nullable
@@ -392,18 +337,11 @@ class _$UserProfileImpl implements _UserProfile {
     this.mealFrequency,
     this.eatingSchedule,
     this.activityLevel,
-    final List<WorkoutPreference> workoutPreferences = const [],
-    this.workoutLocation,
-    final List<Equipment> availableEquipment = const [],
-    final List<String> avoidAreas = const [],
     this.currentStep = 1,
     final Map<int, bool> completedSteps = const {},
     this.createdAt,
     this.updatedAt,
   }) : _targetAreas = targetAreas,
-       _workoutPreferences = workoutPreferences,
-       _availableEquipment = availableEquipment,
-       _avoidAreas = avoidAreas,
        _completedSteps = completedSteps;
 
   factory _$UserProfileImpl.fromJson(Map<String, dynamic> json) =>
@@ -452,44 +390,6 @@ class _$UserProfileImpl implements _UserProfile {
   // Step 11: Activity level
   @override
   final ActivityLevel? activityLevel;
-  // Step 12: Workout preferences
-  final List<WorkoutPreference> _workoutPreferences;
-  // Step 12: Workout preferences
-  @override
-  @JsonKey()
-  List<WorkoutPreference> get workoutPreferences {
-    if (_workoutPreferences is EqualUnmodifiableListView)
-      return _workoutPreferences;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_workoutPreferences);
-  }
-
-  // Step 13: Workout location
-  @override
-  final WorkoutLocation? workoutLocation;
-  // Step 14: Available equipment
-  final List<Equipment> _availableEquipment;
-  // Step 14: Available equipment
-  @override
-  @JsonKey()
-  List<Equipment> get availableEquipment {
-    if (_availableEquipment is EqualUnmodifiableListView)
-      return _availableEquipment;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_availableEquipment);
-  }
-
-  // Step 15: Areas to avoid (injuries)
-  final List<String> _avoidAreas;
-  // Step 15: Areas to avoid (injuries)
-  @override
-  @JsonKey()
-  List<String> get avoidAreas {
-    if (_avoidAreas is EqualUnmodifiableListView) return _avoidAreas;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_avoidAreas);
-  }
-
   // Metadata
   @override
   @JsonKey()
@@ -510,7 +410,7 @@ class _$UserProfileImpl implements _UserProfile {
 
   @override
   String toString() {
-    return 'UserProfile(currentWeight: $currentWeight, targetWeight: $targetWeight, hasPreviousAttempts: $hasPreviousAttempts, previousAttemptsDetails: $previousAttemptsDetails, birthYear: $birthYear, height: $height, targetAreas: $targetAreas, currentBodyShape: $currentBodyShape, targetBodyShape: $targetBodyShape, mealFrequency: $mealFrequency, eatingSchedule: $eatingSchedule, activityLevel: $activityLevel, workoutPreferences: $workoutPreferences, workoutLocation: $workoutLocation, availableEquipment: $availableEquipment, avoidAreas: $avoidAreas, currentStep: $currentStep, completedSteps: $completedSteps, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserProfile(currentWeight: $currentWeight, targetWeight: $targetWeight, hasPreviousAttempts: $hasPreviousAttempts, previousAttemptsDetails: $previousAttemptsDetails, birthYear: $birthYear, height: $height, targetAreas: $targetAreas, currentBodyShape: $currentBodyShape, targetBodyShape: $targetBodyShape, mealFrequency: $mealFrequency, eatingSchedule: $eatingSchedule, activityLevel: $activityLevel, currentStep: $currentStep, completedSteps: $completedSteps, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -546,20 +446,6 @@ class _$UserProfileImpl implements _UserProfile {
                 other.eatingSchedule == eatingSchedule) &&
             (identical(other.activityLevel, activityLevel) ||
                 other.activityLevel == activityLevel) &&
-            const DeepCollectionEquality().equals(
-              other._workoutPreferences,
-              _workoutPreferences,
-            ) &&
-            (identical(other.workoutLocation, workoutLocation) ||
-                other.workoutLocation == workoutLocation) &&
-            const DeepCollectionEquality().equals(
-              other._availableEquipment,
-              _availableEquipment,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._avoidAreas,
-              _avoidAreas,
-            ) &&
             (identical(other.currentStep, currentStep) ||
                 other.currentStep == currentStep) &&
             const DeepCollectionEquality().equals(
@@ -574,7 +460,7 @@ class _$UserProfileImpl implements _UserProfile {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
+  int get hashCode => Object.hash(
     runtimeType,
     currentWeight,
     targetWeight,
@@ -588,15 +474,11 @@ class _$UserProfileImpl implements _UserProfile {
     mealFrequency,
     eatingSchedule,
     activityLevel,
-    const DeepCollectionEquality().hash(_workoutPreferences),
-    workoutLocation,
-    const DeepCollectionEquality().hash(_availableEquipment),
-    const DeepCollectionEquality().hash(_avoidAreas),
     currentStep,
     const DeepCollectionEquality().hash(_completedSteps),
     createdAt,
     updatedAt,
-  ]);
+  );
 
   /// Create a copy of UserProfile
   /// with the given fields replaced by the non-null parameter values.
@@ -626,10 +508,6 @@ abstract class _UserProfile implements UserProfile {
     final int? mealFrequency,
     final String? eatingSchedule,
     final ActivityLevel? activityLevel,
-    final List<WorkoutPreference> workoutPreferences,
-    final WorkoutLocation? workoutLocation,
-    final List<Equipment> availableEquipment,
-    final List<String> avoidAreas,
     final int currentStep,
     final Map<int, bool> completedSteps,
     final DateTime? createdAt,
@@ -663,15 +541,7 @@ abstract class _UserProfile implements UserProfile {
   @override
   String? get eatingSchedule; // Step 11: Activity level
   @override
-  ActivityLevel? get activityLevel; // Step 12: Workout preferences
-  @override
-  List<WorkoutPreference> get workoutPreferences; // Step 13: Workout location
-  @override
-  WorkoutLocation? get workoutLocation; // Step 14: Available equipment
-  @override
-  List<Equipment> get availableEquipment; // Step 15: Areas to avoid (injuries)
-  @override
-  List<String> get avoidAreas; // Metadata
+  ActivityLevel? get activityLevel; // Metadata
   @override
   int get currentStep;
   @override
@@ -812,7 +682,7 @@ class __$$FormProgressImplCopyWithImpl<$Res>
 class _$FormProgressImpl implements _FormProgress {
   const _$FormProgressImpl({
     this.currentStep = 0,
-    this.totalSteps = 15,
+    this.totalSteps = 11,
     final Map<int, bool> completedSteps = const {},
   }) : _completedSteps = completedSteps;
 

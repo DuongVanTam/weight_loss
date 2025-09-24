@@ -6,7 +6,7 @@ part of 'user_form_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userFormServiceHash() => r'5b908e241cdf59c8813eb1f09ccc1d4b2214ea9f';
+String _$userFormServiceHash() => r'0c0029fdf3788d6cbeeed063a511d31eabb54359';
 
 /// Service to manage user form data and progress
 ///

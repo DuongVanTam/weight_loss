@@ -17,11 +17,11 @@ abstract class BaseFormPage extends ConsumerWidget {
   /// Subtitle/description of the form step
   String get subtitle;
   
-  /// Current step number (1-15)
+  /// Current step number (1-11)
   int get stepNumber;
   
   /// Total steps
-  int get totalSteps => 15;
+  int get totalSteps => 11;
   
   /// Build the form content
   Widget buildFormContent(BuildContext context, WidgetRef ref);

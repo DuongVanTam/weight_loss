@@ -14,29 +14,6 @@ enum ActivityLevel {
   final String displayName;
 }
 
-/// Enum for workout preferences
-enum WorkoutPreference {
-  cardio('Cardio'),
-  hiit('HIIT'),
-  yoga('Yoga'),
-  strength('Tập tạ'),
-  pilates('Pilates'),
-  dance('Nhảy múa');
-
-  const WorkoutPreference(this.displayName);
-  final String displayName;
-}
-
-/// Enum for workout location
-enum WorkoutLocation {
-  home('Tại nhà'),
-  gym('Phòng gym'),
-  outdoor('Ngoài trời'),
-  mixed('Kết hợp');
-
-  const WorkoutLocation(this.displayName);
-  final String displayName;
-}
 
 /// Enum for body shape (current and target)
 enum BodyShape {
@@ -97,18 +74,6 @@ enum MealFrequency {
   final String displayName;
 }
 
-/// Enum for equipment availability
-enum Equipment {
-  dumbbells('Tạ đơn'),
-  resistanceBands('Dây kháng lực'),
-  yogaMat('Thảm yoga'),
-  kettlebells('Tạ ấm'),
-  barbell('Tạ đòn'),
-  none('Không có dụng cụ');
-
-  const Equipment(this.displayName);
-  final String displayName;
-}
 
 /// Main user profile model
 @freezed
@@ -148,18 +113,6 @@ class UserProfile with _$UserProfile {
     // Step 11: Activity level
     ActivityLevel? activityLevel,
     
-    // Step 12: Workout preferences
-    @Default([]) List<WorkoutPreference> workoutPreferences,
-    
-    // Step 13: Workout location
-    WorkoutLocation? workoutLocation,
-    
-    // Step 14: Available equipment
-    @Default([]) List<Equipment> availableEquipment,
-    
-    // Step 15: Areas to avoid (injuries)
-    @Default([]) List<String> avoidAreas,
-    
     // Metadata
     @Default(1) int currentStep,
     @Default({}) Map<int, bool> completedSteps,
@@ -176,7 +129,7 @@ class UserProfile with _$UserProfile {
 class FormProgress with _$FormProgress {
   const factory FormProgress({
     @Default(0) int currentStep,
-    @Default(15) int totalSteps,
+    @Default(11) int totalSteps,
     @Default({}) Map<int, bool> completedSteps,
   }) = _FormProgress;
 
